@@ -1,76 +1,122 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benim Radyo</title>
+    <title>Zeno Radio and Chat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #f4f4f9;
+            height: 100vh;
+        }
+
+        #zeno-widget {
+            width: 100%;
+            background-color: #222;
+            color: white;
             text-align: center;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        main {
-            margin: 20px;
-        }
-        audio {
-            width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
-        }
-        .chat {
-            margin-top: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
             padding: 10px;
-            max-width: 400px;
-            margin: 20px auto;
         }
-        .chat textarea {
+
+        #chat-container {
             width: 100%;
-            height: 100px;
-            resize: none;
-            margin-bottom: 10px;
+            max-width: 600px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
-        .chat button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
+
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        #chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        #chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        #chat-input button {
+            padding: 10px 15px;
             border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
             cursor: pointer;
         }
-        .chat button:hover {
-            background-color: #45a049;
+
+        #chat-input button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Benim Radyo</h1>
-    </header>
-    <main>
-        <div class="chat">
-            <h3>Canlı Sohbet</h3>
-            <div class="chat-window" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; background-color: #f9f9f9; margin-bottom: 10px;">
-                <!-- Mesajlar buraya gelecek -->
-                <p><strong>Ali:</strong> Merhaba, hoş geldiniz!</p>
-                <p><strong>Ayşe:</strong> Yayın harika, çok keyif alıyorum!</p>
-            </div>
-            <textarea id="chatInput" placeholder="Mesajınızı yazın..." style="width: 100%; height: 50px; resize: none; margin-bottom: 10px;"></textarea>
-            <button style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Gönder</button>
+
+    <!-- Zeno Radio Widget Placeholder -->
+    <div id="zeno-widget">
+        <p>Zeno Radio Widget (Embed Code Here)</p>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chat-container">
+        <div id="chat-messages">
+            <!-- Chat messages will appear here -->
         </div>
-    <p>Her hakkı saklıdır © 2025</p>
-    </main>
+        <div id="chat-input">
+            <input type="text" id="message-input" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageElement.style.marginBottom = '10px';
+                messageElement.style.padding = '10px';
+                messageElement.style.backgroundColor = '#e1f5fe';
+                messageElement.style.borderRadius = '5px';
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                messageInput.value = '';
+            }
+        }
+
+        messageInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+
 </body>
 </html>
